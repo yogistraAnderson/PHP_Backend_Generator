@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<schema name="guyanalive">		
+	<!--lookup table-->
+	<table name="resource_types" do_object="1">
+		<!--
+		preload:resource_types
+		1,'Image'
+		2,'Text'
+		preload:end
+		-->
+		<field name="resource_tp_id" type="INT" primary_key="1" auto_increte="1"/>
+		<field name="resource_tp_text" type="VARCHAR" size="64" not_null="1" />
+	</table>
+	
+	<!--lookup table-->
+	<table name="mod_types" do_object="1">
+		<!--
+		preload:mod_types
+		1,'MOD-PENDING'
+		2,'MOD-OK'
+		3,'MOD-DENIED'
+		preload:end
+		-->
+		<field name="mod_type_id" type="INT" primary_key="1" auto_increte="1"/>
+		<field name="mod_type_text" type="VARCHAR" size="64" not_null="1" />
+	</table>
+	
+	<table name="content_mstr" do_object="1" do_logging="1">
+		<field name="content_id" type="INT" primary_key="1" auto_increte="1"/>
+		<field name="create_dt" type="TIMESTAMP" not_null="1" default="CURRENT_TIMESTAMP"/>
+		<field name="active_dt_st" type="DATE" />
+		<field name="active_dt_end" type="DATE" />
+		
+		<field name="resource_title" type="VARCHAR" size="256" not_null="1"/>
+		<field name="resource_type" type="INT" not_null="1"/>					<!--foreign key to resource_types table-->
+		<field name="resource_val" type="VARCHAR" size="128" not_null="1"/>
+		
+		<field name="mod_status" type="INT" not_null="1"/>						<!--foreign key to mod_types table-->
+		<field name="submitted_by" type="VARCHAR" size="128" not_null="1"/>		<!--facebook/guyanalive user id-->		
+		<field name="publish_to_feed" type="CHAR" size="1"/>
+		<field name="content_modded_by" type="VARCHAR" size="128" />			<!--facebook/guyanalive user id-->
+		<field name="publish_dt" type="DATE" />									<!--date modded OK-->
+		<field name="softlock" type="INT" not_null="1" />
+	</table>	
+</schema>
